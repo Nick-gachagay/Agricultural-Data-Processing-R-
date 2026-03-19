@@ -20,11 +20,11 @@ This project demonstrates data cleaning, standardization, and analysis of agricu
 - scripts/: R scripts for each workflow stage
 - outputs/: generated plots and tables
 
- How to Run
-1. Run scripts/01_data_loading.R
+  How to Run
+
+1. Run scripts/00_download_data.R
 2. Run scripts/02_data_cleaning.R
 3. Run scripts/03_analysis.R
-
  Sample Output
 - Clean dataset
 - Average yield table
