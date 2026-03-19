@@ -2,31 +2,23 @@ library(dplyr)
 library(readr)
 
 # Load raw data
-data <- read_csv("data/raw/crop_yield_data.csv")
+data <- read_csv("data/raw/world_bank_raw.csv")
 
-# Rename columns for consistency
+library(dplyr)
+library(readr)
+
 data_clean <- data %>%
   rename(
-    country = Country,
-    year = Year,
-    crop = Crop,
-    yield = Yield_tons_per_hectare
-  )
-
-# Remove missing values
-data_clean <- data_clean %>%
-  filter(!is.na(yield))
-
-# Convert types
-data_clean <- data_clean %>%
+    country = country,
+    year = year,
+    yield = yield
+  ) %>%
+  filter(!is.na(yield)) %>%
   mutate(
     year = as.integer(year),
-    yield = as.numeric(yield),
-    crop = tolower(crop)
-  )
-
-# Remove duplicates
-data_clean <- distinct(data_clean)
+    yield = as.numeric(yield)
+  ) %>%
+  distinct()
 
 # Save cleaned data
-write_csv(data_clean, "data/processed/cleaned_data.csv")
+write_csv(data_clean, "data/processed/world_bank_cleaned.csv")
