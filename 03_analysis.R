@@ -2,26 +2,25 @@ library(dplyr)
 library(ggplot2)
 library(readr)
 
-# Load cleaned data
-data <- read_csv("data/processed/cleaned_data.csv")
+data <- read_csv("data/processed/world_bank_cleaned.csv")
 
-# Average yield per crop
+# Summary
 avg_yield <- data %>%
-  group_by(crop) %>%
+  group_by(country) %>%
   summarise(mean_yield = mean(yield, na.rm = TRUE))
 
 print(avg_yield)
 
-# Save summary
-write_csv(avg_yield, "outputs/tables/average_yield.csv")
+# Save table
+write_csv(avg_yield, "outputs/tables/average_yield_by_country.csv")
 
 # Plot trends
-plot <- ggplot(data, aes(x = year, y = yield, color = crop)) +
-  geom_line() +
+plot <- ggplot(data, aes(x = year, y = yield, color = country)) +
+  geom_line(size = 1) +
   labs(
-    title = "Crop Yield Trends",
+    title = "Cereal Yield Trends (East Africa)",
     x = "Year",
-    y = "Yield (tons/hectare)"
+    y = "Yield (kg per hectare)"
   ) +
   theme_minimal()
 
